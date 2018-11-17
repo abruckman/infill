@@ -1,5 +1,9 @@
 {% if authorized %}
 Look who's authorized now!
+<form method="POST" action='/create_accounts'>
+  {{form.hidden_tag()}}
+  {{form.submit}}
+</form>
 {%else%}
 <a href="/get_token">Log in With Zoom</a>
 {% endif %}
