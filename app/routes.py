@@ -14,7 +14,6 @@ def index():
         authorized = True
     else:
         authorized = False
-    print (session['access_token'])
 
     return render_template('index.html', authorized=authorized, form=form)
 
@@ -33,16 +32,30 @@ def oauth_return():
 
 @app.route('/create_accounts', methods=['POST'])
 def create_accounts():
-    info = {
-      "action": "create",
-      "user_info": {
-        "email": "abruckman09+1@gmail.com",
-        "type": 1,
-        "first_name": "Drew",
-        "last_name": "Bruckman"
-      }
-    }
-
-    create_user(info)
+    # form = FileForm()
+    # if session.get('access_token'):
+    #     authorized = True
+    # else:
+    #     authorized = False
+    # if form.validate_on_submit():
+    file = request.files['fileupload']
+    fstring = f.read()
+    print (fstring)
+    # print ("hello")
+    return redirect('/index')
+    # print("failed validation")
+    # return render_template('index.html', authorized=authorized, form=form)
+    # info = {
+    #   "action": "create",
+    #   "user_info": {
+    #     "email": "abruckman09+2@gmail.com",
+    #     "type": 1,
+    #     "first_name": "QALT",
+    #     "last_name": "JGEOZL"
+    #   }
+    # }
+    #
+    # result = create_user(info)
+    # print(result)
 
     return "hello"

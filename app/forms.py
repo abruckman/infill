@@ -1,5 +1,9 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import SubmitField
 
 class FileForm(FlaskForm):
-        submit = SubmitField('Create Accounts')
+    csv_file = FileField('csv', validators=[
+        FileRequired()
+    ])
+    submit = SubmitField('Create Accounts')

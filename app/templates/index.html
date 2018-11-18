@@ -1,9 +1,8 @@
-{% if authorized %}
+{% if authorized%}
 Look who's authorized now!
 <form method="POST" action='/create_accounts'>
-  {{form.hidden_tag()}}
-  {{form.submit}}
+  <input type="file" name="fileupload" id="fileToUpload">
+  <input type="submit" value="Upload File" name="submit">
 </form>
-{%else%}
-<a href="/get_token">Log in With Zoom</a>
 {% endif %}
+<a href="/get_token">Log in With Zoom</a>
