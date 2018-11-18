@@ -1,0 +1,19 @@
+
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - InFill</title>
+      {% else %}
+      <title>InFill</title>
+      {% endif %}
+
+      {% assets "js_all" %}
+          <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+      {% endassets %}
+
+    </head>
+    <body>
+
+        {% block content %}{% endblock %}
+    </body>
+</html>

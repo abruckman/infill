@@ -2,9 +2,10 @@ from flask import render_template, redirect, request, session
 from app import app
 from scripts import get_zoom_token
 from scripts.create_user import create_user
+from scripts.dictify_csv import dictify_csv
 from config import CLIENT_ID, REDIRECT_URI
 from app.forms import FileForm
-
+import csv
 
 @app.route('/')
 @app.route('/index')
@@ -32,30 +33,34 @@ def oauth_return():
 
 @app.route('/create_accounts', methods=['POST'])
 def create_accounts():
-    # form = FileForm()
-    # if session.get('access_token'):
-    #     authorized = True
-    # else:
-    #     authorized = False
-    # if form.validate_on_submit():
-    file = request.files['fileupload']
-    fstring = f.read()
-    print (fstring)
-    # print ("hello")
-    return redirect('/index')
-    # print("failed validation")
-    # return render_template('index.html', authorized=authorized, form=form)
-    # info = {
-    #   "action": "create",
-    #   "user_info": {
-    #     "email": "abruckman09+2@gmail.com",
-    #     "type": 1,
-    #     "first_name": "QALT",
-    #     "last_name": "JGEOZL"
-    #   }
-    # }
-    #
-    # result = create_user(info)
-    # print(result)
+    if session.get('access_token'):
+        authorized = True
+    else:
+        authorized = False
 
-    return "hello"
+    f = request.files['fileupload']
+    successes = list()
+    failures = list()
+    if f.filename[-4:] == '.csv':
+        csv_dict = dictify_csv(f)
+        for row in csv_dict:
+            if row.get("email"):
+                info = {
+                  "action": "create",
+                  "user_info": {
+                    "email": row.get("email"),
+                    "type": 1,
+                    "first_name": row.get("first_name"),
+                    "last_name": row.get("last_name")
+                  }
+                }
+                result = create_user(info)
+                if result['success']=='success':
+                    successes.append(result)
+                else:
+                    failures.append(result)
+        print (successes)
+        print (failures)
+        return render_template("_results.html", successes = successes, failures=failures)
+    else:
+        return ('file must be a csv')
