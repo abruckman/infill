@@ -1,6 +1,8 @@
+import re
+
 def dictify_csv(f):
     fstring = f.read().decode("utf-8")
-    array = fstring.split('\r\n')
+    array = fstring.splitlines()
     csv_dict = []
     headers = []
     for i, row in enumerate(array):
@@ -10,6 +12,7 @@ def dictify_csv(f):
                 headers.append(column)
         else:
             row_dict = {}
+
             for i, column in enumerate(split_row):
                 row_dict[headers[i]] = column
             csv_dict.append(row_dict)
