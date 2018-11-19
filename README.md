@@ -45,7 +45,7 @@ REDIRECT_URI=http://127.0.0.1:5000/oauth_return
 ```
 8. Export the app name variable.
 ```
-$ export FLASK_APP=microblog.py
+$ export FLASK_APP=infill.py
 ```
 9. The app is now ready to run 
 ```
