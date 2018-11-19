@@ -1,1 +1,1 @@
-web: gunicorn app:infill
+web: python infill:app
