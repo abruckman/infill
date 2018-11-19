@@ -15,7 +15,7 @@ def index():
         authorized = True
     else:
         authorized = False
-
+    print('hits index')
     return render_template('index.html', authorized=authorized, form=form)
 
 @app.route('/get_token')
@@ -68,3 +68,9 @@ def create_accounts():
                     failures=failures,
                     message=message,
                     authorized = authorized)
+
+@app.route('/logout')
+def logout():
+    session['access_token'] = None
+    session['refresh_token']= None
+    return redirect('/')

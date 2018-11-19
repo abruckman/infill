@@ -1,5 +1,10 @@
 {% extends "layout.html"%}
 {% block content %}
+{% if authorized %}
+<nav class="navbar navbar-default">
+  <a href="/logout"><button type="button" class="btn btn-default navbar-btn navbar-right">Log Out</button></a>
+</nav>
+{% endif %}
 <div class="background">
   <div class="body-content">
     <div class="page-header">
@@ -24,7 +29,7 @@
           <input type="submit" class="btn btn-default" value="Create Users" name="submit">
         </form>
       {% else %}
-        <p>Log in by clicking the link below. You may have have to navigate back to this site if you aren't already logged in to zoom.</p>
+        <p>Log in by clicking the link below. You may have have to navigate back to this site and click again if you aren't already logged in to zoom.</p>
         <a href="/get_token"><button type="button" class="btn btn-default" aria-label="Left Align">
           Log in With Zoom
         </button></a>

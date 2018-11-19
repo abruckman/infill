@@ -10,3 +10,10 @@ body{
   padding: 16px;
   margin-top: 8px;
 }
+
+.navbar-right {
+    margin-right: 8px;
+}
+.navbar{
+  border-radius: 0px
+}
