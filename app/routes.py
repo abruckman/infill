@@ -42,24 +42,28 @@ def create_accounts():
     failures = list()
     message=""
     if f.filename[-4:] == '.csv':
-        csv_dict = dictify_csv(f)
-        for row in csv_dict:
-            if row.get("email"):
-                info = {
-                  "action": "create",
-                  "user_info": {
-                    "email": row.get("email"),
-                    "type": 1,
-                    "first_name": row.get("first_name"),
-                    "last_name": row.get("last_name")
-                  }
-                }
-                result = create_user(info)
-                if result['success']=='success':
-                    successes.append(result)
-                else:
-                    failures.append(result)
+        try:
+            csv_dict = dictify_csv(f)
 
+            for row in csv_dict:
+                if row.get("email"):
+                    info = {
+                      "action": "create",
+                      "user_info": {
+                        "email": row.get("email"),
+                        "type": 1,
+                        "first_name": row.get("first_name"),
+                        "last_name": row.get("last_name")
+                      }
+                    }
+                    result = create_user(info)
+                    if result['success']=='success':
+                        successes.append(result)
+                    else:
+                        failures.append(result)
+
+        except (IndexError, UnicodeDecodeError):
+            message = "something is wrong with the CSV. Check for unescaped commas or new lines"
     else:
         message= 'file must be a csv'
     return render_template("index.html",
