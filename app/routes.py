@@ -15,7 +15,6 @@ def index():
         authorized = True
     else:
         authorized = False
-    print('hits index')
     return render_template('index.html', authorized=authorized, form=form)
 
 @app.route('/get_token')
