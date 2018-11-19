@@ -41,6 +41,7 @@ def create_accounts():
     f = request.files['fileupload']
     successes = list()
     failures = list()
+    message=""
     if f.filename[-4:] == '.csv':
         csv_dict = dictify_csv(f)
         for row in csv_dict:
@@ -59,8 +60,11 @@ def create_accounts():
                     successes.append(result)
                 else:
                     failures.append(result)
-        print (successes)
-        print (failures)
-        return render_template("_results.html", successes = successes, failures=failures)
+
     else:
-        return ('file must be a csv')
+        message= 'file must be a csv'
+    return render_template("index.html",
+                    successes = successes,
+                    failures=failures,
+                    message=message,
+                    authorized = authorized)

@@ -1,31 +1,50 @@
 {% if successes %}
-  <table>
-    <tr>
-      <th>Email Address</th>
-      <th>Status</th>
-    </tr>
-    {% for row in successes %}
-    <tr>
-      <td>{{ row.email }}</td>
-      <td>{{ row.success }}</td>
-    </tr>
-    {% endfor %}
+<div class="panel panel-success">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Successfully Created</div>
+
+
+  <!-- Table -->
+  <table class="table">
+      <tr>
+        <th>Email Address</th>
+        <th>Status</th>
+      </tr>
+      {% for row in successes %}
+      <tr>
+        <td>{{ row.email }}</td>
+        <td>{{ row.success }}</td>
+      </tr>
+      {% endfor %}
   </table>
+</div>
 {% endif %}
 
 {% if failures %}
-<table>
-  <tr>
-    <th>Email Address</th>
-    <th>Status</th>
-    <th>Message</th>
-  </tr>
-  {% for row in failures %}
-  <tr>
-    <td>{{ row.email }}</td>
-    <td>{{ row.success }}</td>
-    <td>{{ row.message }}</td>
-  </tr>
-  {% endfor %}
-</table>
+<div class="panel panel-danger">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Errors in Creation</div>
+
+
+  <!-- Table -->
+    <table class="table">
+        <tr>
+          <th>Email Address</th>
+          <th>Status</th>
+          <th>Message</th>
+        </tr>
+        {% for row in failures %}
+        <tr>
+          <td>{{ row.email }}</td>
+          <td>{{ row.success }}</td>
+          <td>{{ row.message }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+  </div>
+</div>
+{% endif %}
+
+{% if message %}
+  <p>{{message}}</p>
 {% endif %}

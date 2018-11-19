@@ -1,7 +1,6 @@
 def dictify_csv(f):
     fstring = f.read().decode("utf-8")
     array = fstring.split('\r\n')
-    print (array)
     csv_dict = []
     headers = []
     for i, row in enumerate(array):

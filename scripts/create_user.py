@@ -15,8 +15,7 @@ def create_user(info):
     create_response = requests.post('https://api.zoom.us/v2/users', params=params, headers=headers, data=json.dumps(info) )
     status = create_response.status_code
     content = json.loads(create_response.content)
-    print(status)
-    print(content)
+
 
     result = dict()
     result['email']= info['user_info']['email']

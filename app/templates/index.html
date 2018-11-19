@@ -1,12 +1,37 @@
 {% extends "layout.html"%}
 {% block content %}
+<div class="background">
+  <div class="body-content">
+    <div class="page-header">
+      <h1>InFill <small>A widget to create Zoom accounts</small></h1>
+    </div>
+      {% if authorized%}
+      <div class="panel panel-default">
+        <div class="panel-heading">Instructions</div>
+        <div class="panel-body">
 
-  {% if authorized%}
-    Look who's authorized now!
-    <form method="POST" action='/create_accounts' enctype="multipart/form-data">
-      <input type="file" name="fileupload" id="fileToUpload" required>
-      <input type="submit" value="Upload File" name="submit">
-    </form>
-  {% endif %}
-  <a href="/get_token">Log in With Zoom</a>
+          <ol>
+            <li>Create a CSV with the Email, First and Last names of the people you want to add to zoom.</li>
+            <li>The CSV should have headers called "email", "first_name" and "last_name" for these 3 categories.</li>
+            <li>Click the Choose File button and select your CSV.</li>
+            <li>Click "Create Users" and the algorithm will return a report of successes and failures.</li>
+
+          </ol>
+        </div>
+      </div>
+        <form method="POST" class="csv-form" action='/create_accounts' enctype="multipart/form-data">
+          <input id="file-select" type="file" name="fileupload" id="fileToUpload" required>
+          <input type="submit" class="btn btn-default" value="Create Users" name="submit">
+        </form>
+      {% else %}
+        <p>Log in by clicking the link below. You have have to navigate back to this site if you aren't already logged in to zoom.</p>
+        <a href="/get_token"><button type="button" class="btn btn-default" aria-label="Left Align">
+          Log in With Zoom
+        </button></a>
+      {% endif %}
+
+      {% include '_results.html' %}
+
+  </div>
+</div>
 {% endblock %}
