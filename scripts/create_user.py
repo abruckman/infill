@@ -31,13 +31,16 @@ def create_user(info):
             result['success'] = "Field Invalid"
             for error in content['errors']:
                 result['message'] += (error['field'])
-        if message == "Invalid api key or secret.":
+        elif message == "Invalid api key or secret.":
             result['success'] = "Invalid login"
             result['message'] += '<a href="/get_token">Log in Again</a>'
-        if "User already in the account" in message:
+        elif "User already in the account" in message:
             result['success'] = "Failed"
             result['message'] = message
-        if message == 'No privilege.':
+        elif message == 'No privilege.':
             result['success'] = "Failed"
             result['message'] = 'ensure that your account has <a href="https://zoom.us/account/user">capability to add users</a>. You may have to enter your credit card.'
+        else:
+            ressult['message']= message
+            result['success'] = "Failed"
     return result
